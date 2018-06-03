@@ -1,0 +1,52 @@
+# 最低版本要求
+cmake_minimum_required (VERSION 3.0)
+
+
+# 工程名
+set(__prj_name "$(--prj_name--)")
+
+# 包含目录
+set(include_dirs )
+
+# 包含的头文件
+set(include_files )
+
+# 包含的CPP
+set(include_cpps )
+
+# 创建Lib
+CreateLibProject(
+    name
+      ${__prj_name}
+    namespace
+      "$(--namespace--)"
+    folder
+      "$(--prj_folder--)"
+    lib_type
+      ${__prj_lib_type}
+    include_dirs
+      ${include_dirs}
+    include_files
+      ${include_files}
+    include_cpps
+      ${include_cpps}
+)
+
+# 创建test
+CreateTestProject(
+    name
+      ${__prj_name}
+    namespace
+      "$(--namespace--)"
+    folder
+      "$(--prj_folder--)"
+    include_dirs
+      ${include_dirs}
+    include_files
+      ${include_files}
+    include_cpps
+      ${include_cpps}
+)
+
+# 项目依赖
+target_link_libraries(${__prj_name}_test ${__prj_name})

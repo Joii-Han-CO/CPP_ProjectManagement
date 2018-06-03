@@ -1,0 +1,19 @@
+# 最低版本要求
+cmake_minimum_required (VERSION 3.0)
+include(CMakeParseArguments)
+include(__modlue.cmake)
+
+# 工程名
+set(__sln_name "$(--sln_name--)")
+project (${__sln_name})
+
+# 工程属性
+add_compile_options("/MT")
+add_compile_options("/WX")
+
+# 输出动态库，还是静态库
+set(__prj_lib_type SHARED)
+
+set_property(GLOBAL PROPERTY USE_FOLDERS ON)
+
+# 各个项目

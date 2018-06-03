@@ -1,0 +1,8 @@
+﻿# VSCode 排除项目
+*/.vscode
+/.vscode
+
+*/__pycache__
+/__pycache__
+
+/output/

@@ -1,0 +1,39 @@
+# 需要创建的目录
+
+dirs
+dir-->project
+dir-->src
+dir-->src\include
+dir-->tools
+dir-->tools\project_temp
+
+# 需要从模板复制到指定路径
+files
+# 工程文件
+$(--namespace--)_type_def.h-->src\include\$(--namespace--)_type_def.h
+main_project.txt-->project\CMakeLists.txt
+__modlue.cmake-->project\__modlue.cmake
+make_project.bat-->make_project.bat
+
+# 模板文件
+src_temp\lib.cpp-->tools\project_temp\lib.cpp
+src_temp\lib.h-->tools\project_temp\lib.h
+src_temp\lib.hpp-->tools\project_temp\lib.hpp
+src_temp\stdafx.cpp-->tools\project_temp\stdafx.cpp
+src_temp\stdafx.h-->tools\project_temp\stdafx.h
+src_temp\test_lib.cpp-->tools\project_temp\test_lib.cpp
+src_temp\test_lib.h-->tools\project_temp\test_lib.h
+src_temp\CmakeLists.txt-->tools\project_temp\CmakeLists.txt
+
+# py代码
+..\python\utility.py-->tools\python\utility.py
+..\python\add.py-->tools\python\add.py
+..\python\update.py-->tools\python\update.py
+
+..\add.bat-->tools\add_prj.bat
+..\update.bat-->tools\update.bat
+
+src_temp\temp_list.txt-->tools\project_temp\temp_list.txt
+
+macro
+
