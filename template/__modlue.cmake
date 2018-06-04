@@ -24,10 +24,10 @@ function(CreateLibProject)
   project(${ARG_name})
   
   # output
-  message(Project Name: ${ARG_name})
-  message(Project Namespace ${ARG_namespace})
-  message(Project Folder: ${ARG_folder})
-  message(Project Dir: ${PROJECT_SOURCE_DIR})
+  message(Project_Name: ${ARG_name})
+  message(Project_Namespace ${ARG_namespace})
+  message(Project_Folder: ${ARG_folder})
+  message(Project_Dir: ${PROJECT_SOURCE_DIR})
 
 ################################################################
 
@@ -103,7 +103,7 @@ function(CreateTestProject)
 ################################################################
 # 解析参数
   set(options OPTIONAL FAST)
-  set(oneValueArgs name namespace folder)
+  set(oneValueArgs lib_name name namespace folder)
   set(multiValueArgs include_dirs include_files include_cpps)
   
   CMAKE_PARSE_ARGUMENTS(
@@ -117,14 +117,13 @@ function(CreateTestProject)
 ################################################################
 # 创建工程
   # create project
-  set(ARG_name_test ${ARG_name}_test)
-  project(${ARG_name_test})
+  project(${ARG_name})
   
   # output
-  message(Project Name: ${ARG_name_test})
-  message(Project Namespace ${ARG_namespace})
-  message(Project Folder: ${ARG_folder})
-  message(Project Dir: ${PROJECT_SOURCE_DIR})
+  message(Test_Project_Name: ${ARG_name})
+  message(Test_Project_Namespace ${ARG_namespace})
+  message(Test_Project_Folder: ${ARG_folder})
+  message(Test_Project_Dir: ${PROJECT_SOURCE_DIR})
 
 ################################################################
 
@@ -132,7 +131,7 @@ function(CreateTestProject)
 ################################################################
 # 设置各个变量
   # project path
-  set(__cpp_dir ${PROJECT_SOURCE_DIR}/../../../src/${ARG_folder}/${ARG_name}/test/)
+  set(__cpp_dir ${PROJECT_SOURCE_DIR}/../../../src/${ARG_folder}/${ARG_lib_name}/test/)
   set(__incldue ${PROJECT_SOURCE_DIR}/../../../src/include/)
   
   # include dirs
@@ -144,13 +143,13 @@ function(CreateTestProject)
   # header file list
   set(__def_includefiles
     ${__cpp_dir}stdafx.h
-    ${__cpp_dir}/test_${ARG_name}.h)
+    ${__cpp_dir}/test_${ARG_lib_name}.h)
   source_group("include" FILES ${__def_includefiles})
   
   # cpp file list
   set(__def_cppfiles
     ${__cpp_dir}/stdafx.cpp
-    ${__cpp_dir}/test_${ARG_name}.cpp)
+    ${__cpp_dir}/test_${ARG_lib_name}.cpp)
   source_group("source" FILES ${__def_cppfiles})
   
 ################################################################
@@ -159,10 +158,10 @@ function(CreateTestProject)
 ################################################################
 # 添加文件
   # include dirs
-  include_directories(${ARG_name_test} ${__include_dirs_buf})
+  include_directories(${ARG_name} ${__include_dirs_buf})
   
   # add src files
-  add_executable(${ARG_name_test}
+  add_executable(${ARG_name}
                 ${__def_includefiles}
                 ${ARG_include_files}
                 ${__def_cppfiles}
@@ -170,7 +169,7 @@ function(CreateTestProject)
   )
   
   target_compile_definitions(
-            ${ARG_name_test}
+            ${ARG_name}
             PRIVATE
             $(--NAMESPACE--)_LIB)
 
@@ -179,8 +178,8 @@ function(CreateTestProject)
 
 ################################################################
 # 设置工程目录
-  set(prj_path ${ARG_folder}/${ARG_name})
-  set_target_properties(${ARG_name_test} PROPERTIES FOLDER ${prj_path})
+  set(prj_path ${ARG_folder}/${ARG_lib_name})
+  set_target_properties(${ARG_name} PROPERTIES FOLDER ${prj_path})
 ################################################################
   
 endfunction(CreateTestProject)

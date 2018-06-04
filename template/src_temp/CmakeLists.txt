@@ -34,8 +34,10 @@ CreateLibProject(
 
 # 创建test
 CreateTestProject(
-    name
+    lib_name
       ${__prj_name}
+    name
+      ${__prj_name}_test
     namespace
       "$(--namespace--)"
     folder
