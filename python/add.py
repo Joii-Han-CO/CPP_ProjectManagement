@@ -2,6 +2,7 @@ import os
 import sys
 import shutil
 import utility
+import git
 import argparse
 
 class AddProject:
@@ -184,7 +185,7 @@ class AddProject:
 
     data = utility.DelEndChar(data)
 
-    data += '# ' + self.__prj_name + '\r\n'
+    data += '\r\n\r\n# ' + self.__prj_name + '\r\n'
     data += 'add_subdirectory(${PROJECT_SOURCE_DIR}/' + \
       self.__prj_folder + '/' + self.__prj_name + '/)'
 
@@ -196,6 +197,17 @@ class AddProject:
 
   def GetLastError(self):
     return self.__last_error
+
+  def UsingGit(self):
+    try:
+      repo = git.Repo(self.__sln_path)
+    except git.InvalidGitRepositoryError as er:
+      self.__last_error = '无法打开Git项目'
+      return False
+    repo.index.add(['project', 'src'])
+    repo.index.commit('add : ' + self.__prj_name)
+    repo.__del__()
+    return True
 
   # end
   ##################################################
@@ -239,6 +251,10 @@ def main():
   
   if ap.AddCMake() == False:
     print('添加项目错误--' + ap.GetLastError())
+    return
+  
+  if ap.UsingGit() == False:
+    print('提交Git失败--' + ap.GetLastError())
     return
 
   print('项目添加完成')

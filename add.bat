@@ -1,7 +1,7 @@
 echo off
-set name=fde_test
+set name=ipc
 set folder=lib
-::set path=
+set s_path=E:\code\fde_lib_new\fde_lib
 
-python .\python\add.py -n %name% -f %folder%
+python .\python\add.py -p %s_path% -n %name% -f %folder%
 pause
