@@ -60,6 +60,9 @@ class AddProject:
     self.__sln_name = sln_map['sln_name']
     self.__sln_namespace = sln_map['namespace']
 
+    print('获取到 name:' + self.__sln_name)
+    print('获取到 namespace:' + self.__sln_namespace)
+
     return True
 
   # 初始化各种数据的信息
