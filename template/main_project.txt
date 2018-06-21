@@ -1,5 +1,7 @@
 # 最低版本要求
 cmake_minimum_required (VERSION 3.0)
+set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/CMake")
+include(cotire)
 
 # 工程名
 set(_sln_name "$(--sln_name--)")
@@ -9,8 +11,12 @@ project (${_sln_name})
 set(_namepace "$(--namespace--)")
 
 # 工程属性
-add_compile_options("/MT")
-add_compile_options("/WX")
+if (CMAKE_SYSTEM_NAME MATCHES "Windows")
+  #add_compile_options("/MTd")
+  add_compile_options("/WX")
+else()
+  add_compile_options(-std=c++11)
+endif()
 
 # 输出动态库，还是静态库
 set(_prj_lib_type SHARED)

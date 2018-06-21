@@ -12,6 +12,7 @@ files
 # 工程文件
 $(--namespace--)_type_def.h-->src\include\$(--namespace--)_type_def.h
 main_project.txt-->project\CMakeLists.txt
+cotire.cmake-->project\CMake\cotire.cmake
 make_project.bat-->make_project.bat
 
 # 模板文件

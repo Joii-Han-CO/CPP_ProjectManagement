@@ -58,6 +58,10 @@ target_compile_definitions(${_lib_name}
 # 设置工程目录
 set_target_properties(${_lib_name} PROPERTIES FOLDER
                       ${_lib_folder}/${_lib_name})
+
+# 预编译头
+set_target_properties(${_lib_name} PROPERTIES
+                      COTIRE_CXX_PREFIX_HEADER_INIT ${_stdafx}.h)
 ################################################################
 
 
@@ -101,6 +105,12 @@ target_compile_definitions(${_test_name}
                            
 set_target_properties(${_test_name} PROPERTIES FOLDER
                       ${_lib_folder}/${_lib_name})
+
+# 预编译头
+set_target_properties(${_test_name} PROPERTIES
+                      COTIRE_CXX_PREFIX_HEADER_INIT ${_stdafx}.h)
+#set_target_properties(${_test_name} PROPERTIES
+#                      COTIRE_ENABLE_PRECOMPILED_HEADER FALSE)
 ################################################################
 
 
@@ -111,3 +121,5 @@ Add_Definitions(-D_UNICODE)
 
 # 项目依赖
 target_link_libraries(${_lib_name}_test ${_lib_name})
+
+cotire(${_lib_name} ${_lib_name}_test)
